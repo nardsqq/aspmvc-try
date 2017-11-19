@@ -13,11 +13,7 @@ namespace FirstASPProject
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                "SeriesByReleaseDate",
-                "series/released/{year}/{month}",
-                new { controller = "Series", action = "ByReleaseDate"},
-                new { year = @"2015|2016", month = @"\d{2}"});
+            routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
                 name: "Default",

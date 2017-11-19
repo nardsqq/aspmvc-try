@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FirstASPProject.Models;
+using FirstASPProject.ViewModels;
 
 namespace FirstASPProject.Controllers
 {
@@ -14,24 +15,19 @@ namespace FirstASPProject.Controllers
         {
             var series = new Series() { Name = "Silicon Valley" };
 
-            return View(series);
+            var customers = new List<Customer>
+            {
+                new Customer {Name = "Customer 1"},
+                new Customer {Name = "Customer 2"}
+            };
 
-            //return HttpNotFound();
-            //return RedirectToAction("Index", "Home", new { page = 1, sortBy = "name" });
-        }
+            var ViewModel = new RandomSeriesViewModel
+            {
+                Series = series,
+                Customers = customers
+            };
 
-        public ActionResult Edit(int id)
-        {
-            return Content("id=" + id);
-        }
-
-        public ActionResult Index(int? pageIndex, string sortBy)
-        {
-            if (!pageIndex.HasValue)
-                pageIndex = 1;
-            if (String.IsNullOrWhiteSpace(sortBy))
-                sortBy = "Name";
-            return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+            return View(ViewModel);    
         }
 
         public ActionResult ByReleaseDate(int year, int month)
